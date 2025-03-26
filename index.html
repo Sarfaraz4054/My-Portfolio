@@ -890,7 +890,18 @@
                     mouseY = e.clientY;
                 });
                 
-              
+                function animateCursor() {
+                    // Ease the follower towards the cursor
+                    followerX += (mouseX - followerX) * 0.1;
+                    followerY += (mouseY - followerY) * 0.1;
+                    
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) ${isHovering ? 'scale(1.5)' : 'scale(1)'}`;
+                    
+                    requestAnimationFrame(animateCursor);
+                }
+                
+                animateCursor();
+                
                 // Add active class when hovering interactive elements
                 const interactiveElements = document.querySelectorAll('a, button, .project-card, .quality-item, .hobby-item, .skill-category, .education-item, .certification-item');
                 
